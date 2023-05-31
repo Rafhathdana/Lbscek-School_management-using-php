@@ -1,0 +1,31 @@
+mysql> create view view1 as select stu_no,stu_name,dep,addr from student;
+Query OK, 0 rows affected (1.05 sec)
+
+mysql> select * from view1;
++--------+----------+------+-----------+
+| stu_no | stu_name | dep  | addr      |
++--------+----------+------+-----------+
+|    100 | hari     | cse  | kasaragod |
+|    101 | devi     | cse  | kasaragod |
+|    102 | sam      | it   | kannur    |
+|    103 | sreehari | it   | calicut   |
+|    104 | rani     | ece  | kannur    |
+|    105 | raj      | cse  | palakkad  |
++--------+----------+------+-----------+
+
+
+mysql> create view view2 as select stu_no,stu_name,physics,chemistry,maths,cp from student;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from view2;
++--------+----------+---------+-----------+-------+------+
+| stu_no | stu_name | physics | chemistry | maths | cp   |
++--------+----------+---------+-----------+-------+------+
+|    100 | hari     |      60 |        45 |    50 |   75 |
+|    101 | devi     |      55 |        78 |    60 |   40 |
+|    102 | sam      |      77 |        88 |    45 |   45 |
+|    103 | sreehari |      75 |        77 |    90 |   60 |
+|    104 | rani     |      98 |        89 |    91 |   52 |
+|    105 | raj      |      77 |        67 |    88 |   48 |
++--------+----------+---------+-----------+-------+------+
+

@@ -1,0 +1,93 @@
+mysql> create table customer (cust_id int primary key not null,name varchar(20),phone_no varchar(10));
+mysql> create table book (book_id int primary key not null,title varchar(30),author_name varchar(20),unit_price int,publisher varchar(30));
+mysql> create table sales (cust_id int,book_id int,order_date date,quantity int,foreign key(cust_id) references customer(cust_id),foreign key(book_id) references book(book_id));
+
+mysql> insert into customer values(100,"prasad","12345");
+
+mysql> insert into customer values(101,"john","23456");
+
+mysql> insert into customer values(102,"sam","34567");
+
+
+mysql> insert into book values(2001,"ds","samantha",400,"phi");
+
+
+mysql> insert into book values(2002,"cpgm","samantha",300,"phi");
+
+mysql> insert into book values(2003,"dbms","navathe",500,"tmh");
+
+
+mysql> insert into book values(2004,"dc","forouzan",600,"tmh");
+
+
+mysql> insert into book values(2005,"cn","stallings",500,"pearson");
+
+
+mysql> insert into book values(2006,"python","lambert",200,"pearson");
+
+mysql> insert into sales values(100,2001,'2017-01-02',3);
+mysql> insert into sales values(100,2002,'2016-04-02',4);
+mysql> insert into sales values(102,2006,'2018-01-02',2);
+mysql> insert into sales values(101,2005,'2017-05-02',1);
+
+mysql> select * from customer;
++---------+--------+----------+
+| cust_id | name   | phone_no |
++---------+--------+----------+
+|     100 | prasad | 12345    |
+|     101 | john   | 23456    |
+|     102 | sam    | 34567    |
++---------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from book;
++---------+--------+-------------+------------+-----------+
+| book_id | title  | author_name | unit_price | publisher |
++---------+--------+-------------+------------+-----------+
+|    2001 | ds     | samantha    |        400 | phi       |
+|    2002 | cpgm   | samantha    |        300 | phi       |
+|    2003 | dbms   | navathe     |        500 | tmh       |
+|    2004 | dc     | forouzan    |        600 | tmh       |
+|    2005 | cn     | stallings   |        500 | pearson   |
+|    2006 | python | lambert     |        200 | pearson   |
++---------+--------+-------------+------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from sales;
++---------+---------+------------+----------+
+| cust_id | book_id | order_date | quantity |
++---------+---------+------------+----------+
+|     100 |    2001 | 2017-01-02 |        3 |
+|     100 |    2002 | 2016-04-02 |        4 |
+|     102 |    2006 | 2018-01-02 |        2 |
+|     101 |    2005 | 2017-05-02 |        1 |
++---------+---------+------------+----------+
+4 rows in set (0.00 sec)
+mysql>  select sum(unit_price*quantity) from book as b,sales as s where s.book_id=b.book_id and s.order_date between "2017-04-01"                                and "2018-03-31";
++--------------------------+
+| sum(unit_price*quantity) |
++--------------------------+
+|                      900 |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql>  select sum(unit_price*quantity) from book as b,sales as s where s.book_id=b.book_id and s.order_date between "2016-04-01"                                and "2017-03-31";
++--------------------------+
+| sum(unit_price*quantity) |
++--------------------------+
+|                     2400 |
++--------------------------+
+1 row in set (0.01 sec)
+
+
+mysql> select distinct publisher,count(*),sum(unit_price) from book where publisher!="phi" group by publisher; 
++-----------+----------+-----------------+
+| publisher | count(*) | sum(unit_price) |
++-----------+----------+-----------------+
+| pearson   |        2 |             700 |
+| phi       |        2 |             700 |
+| tmh       |        2 |            1100 |
++-----------+----------+-----------------+
+3 rows in set (0.00 sec)
+
+

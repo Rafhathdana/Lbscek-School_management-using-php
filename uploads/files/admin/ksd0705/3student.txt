@@ -1,0 +1,69 @@
+mysql> create table student (stu_no int primary key,stu_name varchar(20),maths int,physics int,chemistry int,cp int,dep varchar(20),addr varchar(30));
+mysql> insert into student values(100,"hari",50,60,45,75,"cse","kasaragod");
+
+mysql> insert into student values(101,"devi",60,55,78,40,"cse","kasaragod");
+
+
+mysql> insert into student values(102,"sam",45,77,88,45,"it","kannur");
+
+mysql> insert into student values(103,"sreehari",90,75,77,60,"it","calicut"); 
+
+mysql> insert into student values(104,"rani",91,98,89,52,"ece","kannur");
+
+mysql> insert into student values(105,"raj",88,77,67,48,"cse","palakkad);
+mysql> select * from student;
++--------+----------+-------+---------+-----------+------+------+-----------+
+| stu_no | stu_name | maths | physics | chemistry | cp   | dep  | addr      |
++--------+----------+-------+---------+-----------+------+------+-----------+
+|    100 | hari     |    50 |      60 |        45 |   75 | cse  | kasaragod |
+|    101 | devi     |    60 |      55 |        78 |   40 | cse  | kasaragod |
+|    102 | sam      |    45 |      77 |        88 |   45 | it   | kannur    |
+|    103 | sreehari |    90 |      75 |        77 |   60 | it   | calicut   |
+|    104 | rani     |    91 |      98 |        89 |   52 | ece  | kannur    |
+|    105 | raj      |    88 |      77 |        67 |   48 | cse  | palakkad  |
++--------+----------+-------+---------+-----------+------+------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select stu_no,stu_name,cp from student where cp<50 order by (cp) asc;
++--------+----------+------+
+| stu_no | stu_name | cp   |
++--------+----------+------+
+|    101 | devi     |   40 |
+|    102 | sam      |   45 |
+|    105 | raj      |   48 |
++--------+----------+------+
+3 rows in set (0.01 sec)
+
+mysql> select stu_no,stu_name,dep from student order by dep;
++--------+----------+------+
+| stu_no | stu_name | dep  |
++--------+----------+------+
+|    100 | hari     | cse  |
+|    101 | devi     | cse  |
+|    105 | raj      | cse  |
+|    104 | rani     | ece  |
+|    102 | sam      | it   |
+|    103 | sreehari | it   |
++--------+----------+------+
+6 rows in set (0.01 sec)
+
+mysql> select stu_name from student where stu_name like 's%';
++----------+
+| stu_name |
++----------+
+| sam      |
+| sreehari |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> select dep,avg(cp) from student group by dep;
++------+---------+
+| dep  | avg(cp) |
++------+---------+
+| cse  | 54.3333 |
+| ece  | 52.0000 |
+| it   | 52.5000 |
++------+---------+
+3 rows in set (0.00 sec)
+
+

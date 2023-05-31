@@ -1,0 +1,88 @@
+mysql> select * from emp;
++-------+---------+--------+--------+
+| empId | empName | deptNo | salary |
++-------+---------+--------+--------+
+|  2001 | Hari    |   1006 |  30000 |
+|  2002 | Devi    |   1002 |  40000 |
+|  2003 | Gupta   |   1003 |  50000 |
+|  2004 | Ravi    |   1004 |  60000 |
+|  2005 | Rani    |   1007 |  70000 |
++-------+---------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from dept;
++--------+-------------+--------------+
+| deptNo | deptName    | deptLocation |
++--------+-------------+--------------+
+|   1001 | HR          | Calicut      |
+|   1002 | Marketing   | Cochin       |
+|   1003 | Sales       | Trivandrum   |
+|   1004 | Testing     | Bangalore    |
+|   1005 | Development | Bangalore    |
++--------+-------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select empID,empName,emp.deptNo,salary,deptName from emp,dept where emp.deptNo=dept.deptNo;
++-------+---------+--------+--------+-----------+
+| empID | empName | deptNo | salary | deptName  |
++-------+---------+--------+--------+-----------+
+|  2002 | Devi    |   1002 |  40000 | Marketing |
+|  2003 | Gupta   |   1003 |  50000 | Sales     |
+|  2004 | Ravi    |   1004 |  60000 | Testing   |
++-------+---------+--------+--------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from emp where empId not in (select empID from emp,dept where emp.deptNo=dept.deptNo);
++-------+---------+--------+--------+
+| empId | empName | deptNo | salary |
++-------+---------+--------+--------+
+|  2001 | Hari    |   1006 |  30000 |
+|  2005 | Rani    |   1007 |  70000 |
++-------+---------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select avg(salary)from emp;
++-------------+
+| avg(salary) |
++-------------+
+|  50000.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from emp where salary>(select avg(salary)from emp);
++-------+---------+--------+--------+
+| empId | empName | deptNo | salary |
++-------+---------+--------+--------+
+|  2004 | Ravi    |   1004 |  60000 |
+|  2005 | Rani    |   1007 |  70000 |
++-------+---------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select emp.deptNo from emp,dept where emp.deptNo=dept.deptNo;
++--------+
+| deptNo |
++--------+
+|   1002 |
+|   1003 |
+|   1004 |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> select deptNo from emp where deptNo not in (select dept.deptNo from emp,dept where emp.deptNo=dept.deptNo);
++--------+
+| deptNo |
++--------+
+|   1006 |
+|   1007 |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> select deptNo from dept where deptNo not in (select dept.deptNo from emp,dept where emp.deptNo=dept.deptNo);
++--------+
+| deptNo |
++--------+
+|   1001 |
+|   1005 |
++--------+
+2 rows in set (0.00 sec)
+

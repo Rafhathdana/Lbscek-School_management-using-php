@@ -1,0 +1,96 @@
+mysql> create table emp (emp_id int primary key not null,emp_name varchar(20),dpt_no int,salary int);
+
+
+mysql> create table department (dpt_no int primary key not null,dpt_name varchar(10),location varchar(20));
+
+mysql> insert into emp values (2001,"hari",1006,30000);
+mysql> insert into emp values (2002,"devi",1002,40000);
+mysql> insert into emp values (2003,"gupta",1003,50000)
+mysql> insert into emp values (2004,"ravi",1004,60000);
+mysql> insert into emp values (2005,"rani",1007,70000);
+
+mysql> insert into department values(1001,"hr","calicut");
+mysql> insert into department values(1002,"marketing","cochin");
+mysql> insert into department values(1003,"sales","trivandrum");
+mysql> insert into department values(1004,"testing","bangalore");
+mysql> insert into department values(1005,"development","bangalore");
+
+
+mysql> select * from emp;
++--------+----------+--------+--------+
+| emp_id | emp_name | dpt_no | salary |
++--------+----------+--------+--------+
+|   2001 | hari     |   1006 |  30000 |
+|   2002 | devi     |   1002 |  40000 |
+|   2003 | gupta    |   1003 |  50000 |
+|   2004 | ravi     |   1004 |  60000 |
+|   2005 | rani     |   1007 |  70000 |
++--------+----------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from department;
++--------+------------+------------+
+| dpt_no | dpt_name   | location   |
++--------+------------+------------+
+|   1001 | hr         | calicut    |
+|   1002 | marketing  | cochin     |
+|   1003 | sales      | trivandrum |
+|   1004 | testing    | bangalore  |
+|   1005 | developmen | bangalore  |
++--------+------------+------------+
+
+mysql> select e.emp_id,e.emp_name,e.dpt_no,e.salary,d.dpt_name from emp as e,department as d where e.dpt_no=d.dpt_no;
++--------+----------+--------+--------+-----------+
+| emp_id | emp_name | dpt_no | salary | dpt_name  |
++--------+----------+--------+--------+-----------+
+|   2002 | devi     |   1002 |  40000 | marketing |
+|   2003 | gupta    |   1003 |  50000 | sales     |
+|   2004 | ravi     |   1004 |  60000 | testing   |
++--------+----------+--------+--------+-----------+
+
+mysql> select * from emp where dpt_no not in (select dpt_no from department);
++--------+----------+--------+--------+
+| emp_id | emp_name | dpt_no | salary |
++--------+----------+--------+--------+
+|   2001 | hari     |   1006 |  30000 |
+|   2005 | rani     |   1007 |  70000 |
++--------+----------+--------+--------+
+
+mysql> select * from emp where salary > (select avg(salary) from emp);
++--------+----------+--------+--------+
+| emp_id | emp_name | dpt_no | salary |
++--------+----------+--------+--------+
+|   2004 | ravi     |   1004 |  60000 |
+|   2005 | rani     |   1007 |  70000 |
++--------+----------+--------+
+
+mysql> select dpt_no from emp union select dpt_no from department order by dpt_no;
++--------+
+| dpt_no |
++--------+
+|   1001 |
+|   1002 |
+|   1003 |
+|   1004 |
+|   1005 |
+|   1006 |
+|   1007 |
++--------+
+
+mysql> select distinct dpt_no from emp where dpt_no not in (select dpt_no from department);
++--------+
+| dpt_no |
++--------+
+|   1006 |
+|   1007 |
++--------+
+
+mysql> select distinct dpt_no from department where dpt_no not in (select dpt_no from emp);
++--------+
+| dpt_no |
++--------+
+|   1001 |
+|   1005 |
++--------+
+
+

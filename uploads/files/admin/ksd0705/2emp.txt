@@ -1,0 +1,52 @@
+mysql> create table employee (emp_no int primary key not null,emp_name varchar(30),emp_address varchar(39),salary int,department varchar(20));
+mysql> insert into employee values(2001,"hari","palakkad",30000,"research");
+mysql> insert into employee values(2002,"devi","kasaragod",40000,"network");
+mysql> insert into employee values(2003,"gupta","kannur",50000,"system admin"
+mysql> insert into employee values(2004,"ravi","calicut",60000,"hr");
+mysql> insert into employee values(2005,"rani","calicut",70000,"hr");
+
+mysql> select * from employee;
++--------+----------+-------------+--------+--------------+
+| emp_no | emp_name | emp_address | salary | department   |
++--------+----------+-------------+--------+--------------+
+|   2001 | hari     | palakkad    |  30000 | research     |
+|   2002 | devi     | kasaragod   |  40000 | network      |
+|   2003 | gupta    | kannur      |  50000 | system admin |
+|   2004 | ravi     | calicut     |  60000 | hr           |
+|   2005 | rani     | calicut     |  70000 | hr           |
++--------+----------+-------------+--------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select sum(salary) from employee;
++-------------+
+| sum(salary) |
++-------------+
+|      250000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from employee where salary<50000;
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where salary=(select MAX(salary) from employee);
++--------+----------+-------------+--------+------------+
+| emp_no | emp_name | emp_address | salary | department |
++--------+----------+-------------+--------+------------+
+|   2005 | rani     | calicut     |  70000 | hr         |
++--------+----------+-------------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from employee;
++-------------+
+| avg(salary) |
++-------------+
+|  50000.0000 |
++-------------+
+1 row in set (0.01 sec)
+
+

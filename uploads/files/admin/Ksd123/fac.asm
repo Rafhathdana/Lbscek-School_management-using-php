@@ -1,0 +1,31 @@
+.model small
+.data
+	a dw 0005H
+	b dw 0001H
+.code
+	Mov AX,@data
+	MOV DS,AX
+	MOV AX,b
+	MOV CX,a
+	L8:CMP CX,0000
+        JE L5
+        L6:MUL CX
+           DEC CX
+           JMP L8
+	L5:MOV CH,04H
+	MOV CL,04H
+	MOV BX,AX
+	L2:ROL BX,CL
+	MOV DL,BL
+	AND DL,0FH
+	CMP DL,09H
+	JBE L4
+	ADD DL,07H
+	L4:ADD DL,30H
+	MOV AH,02H
+	INT 21H
+	DEC CH
+	JNZ L2
+	MOV AH,4CH
+	INT 21H
+END

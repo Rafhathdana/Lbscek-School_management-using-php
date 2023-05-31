@@ -1,0 +1,135 @@
+create table cust_details(acc_no int primary key,acc_type enum ("saving","current"),name varchar(20),address varchar(50),balance int);
+
+mysql> describe cust_details;
++----------+--------------------------+------+-----+---------+-------+
+| Field    | Type                     | Null | Key | Default | Extra |
++----------+--------------------------+------+-----+---------+-------+
+| acc_no   | int(11)                  | NO   | PRI | NULL    |       |
+| acc_type | enum('saving','current') | YES  |     | NULL    |       |
+| name     | varchar(20)              | YES  |     | NULL    |       |
+| address  | varchar(50)              | YES  |     | NULL    |       |
+| balance  | int(11)                  | YES  |     | NULL    |       |
++----------+--------------------------+------+-----+---------+-------+
+ 
+
+      TRIGGER
+
+DELIMITER //
+Create trigger checkbalance BEFORE INSERT ON cust_details
+For each row
+begin
+if(new.acc_type='saving' and new.balance<1000) then
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT='balance should be more than 1000';
+end if;
+END //
+
+
+
+    INSERTION
+
+insert into cust_details values(101,'saving',"anu","Kasargod","30000"),(102,'saving',"Sreya","Kanhangad","60000"),(103,'current',"Raj","Mangalore","80000"),(104,'current',"Devi","Kasargod","90000"),(105,'saving',"Rani","Kanhangad","100000");
+ insert into cust_details values (101,'saving',"Arya","Kanhangad",60000);
+
+     ERROR
+insert into cust_details values(106,'saving','Aru','Kasargod',300);
+ERROR 1644 (45000): balance should be more than 1000
+
+
+mysql> select * from cust_details;
++--------+----------+-------+-----------+---------+
+| acc_no | acc_type | name  | address   | balance |
++--------+----------+-------+-----------+---------+
+|    101 | saving   | Anu   | Kasargod  |   30000 |
+|    102 | saving   | Sreya | Kanhangad |   60000 |
+|    103 | current  | Raj   | Mangalore |   80000 |
+|    104 | current  | Devi  | Kasargod  |   90000 |
+|    105 | saving   | Rani  | Kanhangad |  100000 |
++--------+----------+-------+-----------+---------+
+
+
+delimiter //
+CREATE TRIGGER UpdateBal BEFORE UPDATE ON cust_details
+FOR EACH ROW
+BEGIN
+IF(new.acc_type='saving' and new.balance<1000) THEN
+SIGNAL SQLSTATE '45002'
+SET MESSAGE_TEXT = 'Savings balance should be greater than 1000';
+END IF;
+END //
+DELIMITER ;
+
+
+
+
+    PROCEDURES
+DELIMITER //
+CREATE PROCEDURE credit(in account int, in amount int)
+BEGIN
+	IF (SELECT acc_no FROM cust_details WHERE acc_no = account) THEN
+	update cust_details set balance=balance+amount where acc_no=account; 
+	ELSE
+	SIGNAL SQLSTATE '45001'
+	SET MESSAGE_TEXT = 'Account number not found';
+	END IF;
+END //
+
+DELIMITER ;
+DELIMITER //
+CREATE PROCEDURE debit(in account int, in amount int)
+BEGIN
+	IF (SELECT balance FROM cust_details WHERE acc_no = account AND balance >= amount) THEN
+ 	update cust_details set balance=balance-amount where acc_no=account; 
+	ELSE
+	SIGNAL SQLSTATE '45001'
+	SET MESSAGE_TEXT = 'Account number not found or no sufficient balance';
+	END IF;
+END //
+
+
+DELIMITER //
+CREATE FUNCTION ShowBalance(account INT) RETURNS int DETERMINISTIC
+BEGIN
+      DECLARE bal INT;
+      IF (SELECT acc_no FROM cust_details WHERE acc_no = account) THEN
+      
+      SELECT balance into bal FROM cust_details WHERE acc_no = account;
+      RETURN bal;
+      ELSE
+      SIGNAL SQLSTATE '45001'
+      SET MESSAGE_TEXT = 'Account number not found';
+      END IF;
+END //
+
+
+call credit(101,500);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> call debit(101,500);
+ERROR 1644 (45002): Savings balance should be greater than 1000
+mysql> call debit(101,500);
+ERROR 1644 (45002): Savings balance should be greater than 1000
+mysql> select * from cust_details;
++--------+----------+-------+-----------+---------+
+| acc_no | acc_type | name  | address   | balance |
++--------+----------+-------+-----------+---------+
+|    101 | saving   | Anu   | Kasargod  |    1000 |
+|    102 | saving   | Sreya | Kanhangad |   60000 |
+|    103 | current  | Raj   | Mangalore |   80000 |
+|    104 | current  | Devi  | Kasargod  |       0 |
+|    105 | saving   | Rani  | Kanhangad |  101000 |
++--------+----------+-------+-----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> call debit(101,500);
+ERROR 1644 (45002): Savings balance should be greater than 1000
+mysql> call debit(104,500);
+ERROR 1644 (45001): Account number not found or no sufficient balance
+mysql>select Showbalance(101) as bal;
++------+
+| bal  |
++------+
+| 1000 |
++------+
+ 
+

@@ -1,0 +1,7 @@
+ create table item(itemid int(3) not null,idesc varchar(30) not null,qty_on_hand int(3) not null,price int(3) not null,category varchar(30) not null);
+create table sale(sid int(3) not null,item_id int(3) not null,qty_sold int(3) not null,price int(3) not null,total int(3));
+create trigger updateqty after insert on sale for each row update item set qty_on_hand=qty_on_hand-new.qty_sold where item_id=new.item_id;
+mysql> create trigger calctotal before insert on sale for each row set new.total=new.qty_sold*new.price;
+Query OK, 0 rows affected (0.05 sec)
+
+
