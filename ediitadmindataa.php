@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -21,15 +21,18 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
-$Query="SELECT * from adminlbs where id = '$_SESSION[admin]' and password = '$_SESSION[rafh]' ";
-$dbresult=mysql_query($Query);
+  $adminId = $_SESSION['admin'];
+  $rafhPassword = $_SESSION['rafh'];
+  
+  $Query = "SELECT * FROM adminlbs WHERE id = '$adminId' AND password = '$rafhPassword'";
+  $dbresult=mysqli_query($conn,$Query);
 require("main1.php");
             
-		if(mysql_num_rows($dbresult) >0)
+		if(mysqli_num_rows($dbresult) >0)
 				{
-					while($row=mysql_fetch_row($dbresult))
+					while($row=mysqli_fetch_row($dbresult))
 					{
 						 echo "<div class='str'>hello  :  "."$row[0]"."</div>";
 				
@@ -95,7 +98,7 @@ echo "</div></div></form></div>";
      if(isset($_POST['Submit']))
  {
 $fn=$_POST['editfn'];
-$in=$_SESSION[admin];
+$in=$_SESSION['admin'];
 $mn=$_POST['editmn'];
 $date=$_POST['editdate'];
 $g=$_POST['editg'];
@@ -110,7 +113,7 @@ $fileToUpload=$_POST['fileToUpload'];
 $orgin="uploads/admin/$cap2/$cap2.jpg";
          $photo="$orgin";
        $Query = "UPDATE adminlbs SET name =  '$cap1', id =  '$cap2', password =  '$pad', mobile_number =  '$mn', dob =  '$date', gender =  '$g', blood_group =  '$blood', department =  '$department', email =  '$em', photo ='$photo' where id = '$cap2' and password = '$pad'";
-$dbresulta=mysql_query($Query);
+$dbresulta=mysqli_query($conn,$Query);
 l			if($dbresulta)
          {  
 echo "<script type='text/javascript'>alert(\"Record Successfully Updated\")</script>";
@@ -159,7 +162,7 @@ include("editadmindata.php");
         $orgin="uploads/admin/$cap2/$cap2.jpg";
          $photo="$orgin";
        $Query = "UPDATE adminlbs SET name =  '$cap1', id =  '$cap2', password =  '$pad', mobile_number =  '$mn', dob =  '$date', gender =  '$g', blood_group =  '$blood', department =  '$department', email =  '$em', photo ='$photo' where id = '$cap2' and password = '$pad'";
-$dbresulta=mysql_query($Query);
+$dbresulta=mysqli_query($conn,$Query);
 	if($dbresulta)
          {  
      if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
@@ -180,7 +183,7 @@ include("editadmindata.php");
 					exit();
 				}			
 				?>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("main.php");
 ?><div class="fixed"><div class="title" align="center">ADMIN LOGIN</div>
 <form id="form1" name="form1" method="post" action="editadmin.php">

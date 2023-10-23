@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<script language="javascript">
+﻿﻿<script language="javascript">
      function validate()
 {
   var fname=document.reg.fn.value;

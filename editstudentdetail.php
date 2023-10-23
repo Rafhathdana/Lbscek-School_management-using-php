@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 require("main.php");
 ?></body><head>
 <script type="text/javascript">
@@ -28,9 +28,9 @@ document.getElementById(elmnt).style.visibility="hidden"
 				
 				
 				$Query="SELECT * from student where register_number = '$username' and admission_number = '$password' ";
-				$dbresult=mysql_query($Query);
-				if(mysql_num_rows($dbresult) >0)
-				{		while($row=mysql_fetch_row($dbresult))
+				$dbresult=mysqli_query($conn,$Query);
+				if(mysqli_num_rows($dbresult) >0)
+				{		while($row=mysqli_fetch_row($dbresult))
 					{	
 				 echo "<div class='str'>hello  :  "."$row[0]"."</div>";
 	 		}
@@ -48,7 +48,7 @@ document.getElementById(elmnt).style.visibility="hidden"
 				
 				?>
 
-  ﻿<?php
+  <?php
 require("footer.php");
 ?>
 

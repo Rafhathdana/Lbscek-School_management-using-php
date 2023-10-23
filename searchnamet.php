@@ -1,13 +1,13 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
 extract($_POST);
 
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
 require("main1.php");
 }
 else{
-if (isset($_SESSION[teacher]))
+if (isset($_SESSION['teacher']))
 {
 require("main2.php");
 }
@@ -82,7 +82,7 @@ function verify()
 <div class="content"><div class='menu'>
                       <input name="searchname" type="text" class="searchall" id="searchname" size="25" maxlength="200" /></div><div class='menu'>                      <input name="Search" type="submit" class="menu" id="Search" value="Search" onclick="verify();">
 </div></div>
-﻿<?php
+<?php
 require("footer.php");
 ?>
 

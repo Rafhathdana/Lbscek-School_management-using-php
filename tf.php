@@ -1,27 +1,27 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
-﻿﻿﻿﻿<?php
+?>
+<?php
 		
 		include("student.php");
 	extract($_POST);
 	$n=$_GET['n'];	
 $ti=$_GET['ti'];
 
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
-$id=$_SESSION[admin];
+$id=$_SESSION['admin'];
 }
 else{
-if (isset($_SESSION[teacher]))
+if (isset($_SESSION['teacher']))
 {
-$id=$_SESSION[teacher];
+$id=$_SESSION['teacher'];
 }
 else{
-if (isset($_SESSION[login]))
+if (isset($_SESSION['login']))
 {
-$id=$_SESSION[login];
-$rd=$_SESSION[raf];
+$id=$_SESSION['login'];
+$rd=$_SESSION['raf'];
 } 
 else {
 }

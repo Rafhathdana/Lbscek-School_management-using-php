@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -21,17 +21,22 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 
-if (isset($_SESSION[teacher]))
+if (isset($_SESSION['teacher']))
 {
 require("main2.php");
-echo "<div class='str'>hello  :  "."$_SESSION[teacher]"."</div>";
-  $Query="SELECT * from uploads where (department LIKE '%$_SESSION[depart]%' and semester LIKE '%teacher%') or (department = 'all' and semester LIKE '%teacher%') order by uptime DESC";
+echo "<div class='str'>hello  :  ".$_SESSION['teacher']."</div>";
+$departmentSession = $_SESSION['depart'];
 
-			$dbresult=mysql_query($Query);
+$Query = "SELECT * FROM uploads WHERE 
+    (department LIKE '%$departmentSession%' AND semester LIKE '%teacher%') OR 
+    (department = 'all' AND semester LIKE '%teacher%') 
+    ORDER BY uptime DESC";
 
-			if(mysql_num_rows($dbresult) >0)
+			$dbresult=mysqli_query($conn,$Query);
+
+			if(mysqli_num_rows($dbresult) >0)
 				{ 	echo "<div class='fixed'><div class='title' align='center'>UPLOADED FILES TO TEACHERS"."</div>";     
-					while($row=mysql_fetch_row($dbresult))
+					while($row=mysqli_fetch_row($dbresult))
 					{
 				       			
         echo "<div class='menu'>File Name  :  "."$row[0]"."	&nbsp&nbsp UPLOADED ON :'$row[6]'"."</div>";
@@ -46,13 +51,18 @@ echo "<div class='str'>hello  :  "."$_SESSION[teacher]"."</div>";
 				echo "<div class='fixed'><div class='title' align='center'>No Files Uploaded TO TEACHERS"."</div></div>";     
 			}	
 			 
-$Querys="SELECT * from uploads where (department LIKE '%$_SESSION[depart]%' and semester ='all') or (department = 'all' and semester ='all') order by uptime DESC ";
+			$departmentSession = $_SESSION['depart'];
 
-			$dbresult=mysql_query($Querys);
+			$Querys = "SELECT * FROM uploads WHERE 
+				(department LIKE '%$departmentSession%' AND semester ='all') OR 
+				(department = 'all' AND semester ='all') 
+				ORDER BY uptime DESC";
+			
+			$dbresult=mysqli_query($conn,$Querys);
 
-			if(mysql_num_rows($dbresult) >0)
+			if(mysqli_num_rows($dbresult) >0)
 				{ 	echo "<div class='fixed'><div class='title' align='center'>UPLOADED FILES TO ALL"."</div>";     
-					while($row=mysql_fetch_row($dbresult))
+					while($row=mysqli_fetch_row($dbresult))
 					{
 				       			
         echo "<div class='menu'>File Name  :  "."$row[0]"."	&nbsp&nbsp UPLOADED ON :'$row[6]'"."</div>";
@@ -74,7 +84,7 @@ $Querys="SELECT * from uploads where (department LIKE '%$_SESSION[depart]%' and 
 
 				}			
 				?>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("main1.php");
 ?>
 <div class="fixed"><div class="title" align="center">ADMIN LOGIN</div>
@@ -95,6 +105,6 @@ require("main1.php");
                 </div><div class='menu'>  IF YOU ARE STUDENT PLEASE <a href="studentlogin.php">LOGIN HERE</a>  </div>
                   </div>
 </form></div>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("footer.php");
 ?>

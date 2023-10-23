@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -20,8 +20,8 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 $fn=$_POST['editfn'];
-$an=$_SESSION[raf];
-$rn=$_SESSION[login];
+$an=$_SESSION['raf'];
+$rn=$_SESSION['login'];
 $aad=$_POST['editaad'];
 $date=$_POST['editdate'];
 $g=$_POST['editg'];
@@ -56,7 +56,7 @@ if(isset($_POST['Submit']))
 		
 		
  $Query = "UPDATE student SET full_name =  '$cap1', register_number =  '$cap2', admission_number =  '$an', aadhar_number =  '$aad', dob =  '$date', gender =  '$g', blood_group =  '$blood', religion =  '$rel', community =  '$comm', branch =  '$branch', semester =  '$sem', division =  '$di', roll_number =  '$rol', email =  '$em', mobile_number =  '$mn', father_name =  '$fan', father_occupation =  '$fao', father_mobile =  '$fmo', mother_name =  '$man', mother_occupation =  '$mao', mother_mobile =  '$mmo', guardian_name =  '$gn', guardian_mobile =  '$gmn', house_name =  '$hn', land_mark =  '$lm', district =  '$district', state =  '$st', country =  '$cn', pin =  '$pin' where register_number = '$cap2' and admission_number = '$an'";
-$dbresulta=mysql_query($Query);
+$dbresulta=mysqli_query($conn,$Query);
 
 			if($dbresulta)
 {
@@ -72,5 +72,5 @@ include("editstudentdata.php");
 }
  }
 
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 

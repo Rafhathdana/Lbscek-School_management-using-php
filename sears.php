@@ -1,4 +1,4 @@
-﻿﻿﻿
+﻿﻿
 <div class="fixed"><div class="title" align="center">Department Wise Teachers List</div>
 <form action = "depwise1.php" method="post" name="form1" class="menu" id="form1">
                    

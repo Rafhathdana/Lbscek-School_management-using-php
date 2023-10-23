@@ -1,8 +1,8 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
 extract($_POST);
 
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
 require("main1.php");
 }
@@ -75,11 +75,11 @@ function verify()
 			include("student.php");
 			
 			$Query="SELECT * from student where full_name LIKE '%$searchname%' order by full_name ";
-			$dbresult=mysql_query($Query);
+			$dbresult=mysqli_query($conn,$Query);
 
-			if(mysql_num_rows($dbresult) >0)
+			if(mysqli_num_rows($dbresult) >0)
 				{
-					while($row=mysql_fetch_row($dbresult))
+					while($row=mysqli_fetch_row($dbresult))
 					{
 				       			
 	echo "<div class='fixed'><div class='title' align='center'>Search Result"."</div>";     
@@ -108,7 +108,7 @@ function verify()
 		
 		
 ?>
-﻿<?php
+<?php
 require("footer.php");
 ?>
 

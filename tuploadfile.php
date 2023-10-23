@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -21,12 +21,14 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 
-if (isset($_SESSION[teacher]))
-{
-$Query="SELECT * from teacherlbs where id = '$_SESSION[teacher]' and password = '$_SESSION[rafha]' ";
-$dbresult=mysql_query($Query);
+if (isset($_SESSION['teacher']))
+{$teacherId = $_SESSION['teacher'];
+  $rafhaPassword = $_SESSION['rafha'];
+  
+  $Query = "SELECT * FROM teacherlbs WHERE id = '$teacherId' AND password = '$rafhaPassword'";
+  $dbresult=mysqli_query($conn,$Query);
 require("main2.php");
-				 echo "<div class='str'>hello  :  "."$_SESSION[admin]"."</div>";
+				 echo "<div class='str'>hello  :  ".$_SESSION['admin']."</div>";
  require("uploads1.php");
 require("footer.php");
 require'student.php';
@@ -58,7 +60,7 @@ $sem9=$_POST['sem9'];
 $sem10=$_POST['sem10'];
 $sem="$sem1,$sem2,$sem3,$sem4,$sem5,$sem6,$sem7,$sem8,$sem9,$sem10";
 }
-$id = "$_SESSION[teacher]";
+$id = $_SESSION['teacher'];
 $upin = 'teacher';
 date_default_timezone_set('Asia/Kolkata');
 $date = date('Y-m-d H:i:s', time());
@@ -99,7 +101,7 @@ if ($uploadOk == 0) {
 }
  else {
          $files="$target_file";
-         $q1=mysql_query("insert into uploads values('$cap1','$department','$sem','$files','$id','$upin','$qwe')");
+         $q1=mysqli_query($conn,"insert into uploads values('$cap1','$department','$sem','$files','$id','$upin','$qwe')");
       if($q1)
          {  
      if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
@@ -115,7 +117,7 @@ exit();
 }
 ?>
 
-    ﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+    <?php
 require("main2.php");
 ?><div class="fixed"><div class="title" align="center">TEACHER LOGIN</div>
 <form id="form1" name="form1" method="post" action="editteacher.php">
@@ -131,5 +133,5 @@ require("main2.php");
                   </div>
 </form></div>
 
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+
 

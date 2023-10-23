@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 require("main.php");
 ?>
 <br><div class='fixed'><div class='title' align='center'>Student Management System</div><div class='content'><div class='str'> Abstract</div><div class='menu'>
@@ -6,7 +6,7 @@ Student Management System is website which is helpful for students as well as th
 <div class="title" align="center"><a href="/index.php">Go Home</a></div></div>
 
 
-  ﻿<?php
+  <?php
 require("footer.php");
 ?>
 

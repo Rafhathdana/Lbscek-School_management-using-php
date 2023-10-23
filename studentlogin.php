@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 require("main.php");
 ?></body><head>
 <script type="text/javascript">
@@ -52,7 +52,7 @@ function verify()
                 </div></div>
                       </form></div>
 </form></div>
-  ﻿<?php
+  <?php
 require("footer.php");
 ?>
 

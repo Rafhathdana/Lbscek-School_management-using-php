@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -21,25 +21,25 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
 require("main1.php");
-echo "<div class='str'>hello  :  "."$_SESSION[admin]"."</div>";
+echo "<div class='str'>hello  :  "."$_SESSION['admin']"."</div>";
 require("rafht.php");
 $rn=$_POST['rn'];
 $Query="SELECT * from teacherlbs where id = '$rn' ";
-$dbresult=mysql_query($Query);
+$dbresult=mysqli_query($conn,$Query);
             
-		if(mysql_num_rows($dbresult) >0)
+		if(mysqli_num_rows($dbresult) >0)
 				{
-				while($row=mysql_fetch_row($dbresult))
+				while($row=mysqli_fetch_row($dbresult))
 					{
 						 				
 echo "<div class='fixed'><div class='title' align='center'>EDIT TEACHER DATA</div>"	;
 echo "<form method=post name=f1 action='editsave1ttt.php'>";
 
 				echo "<div class='content'><div class='menu'>TEACHER ID NUMBER:	&nbsp&nbsp" . "$row[1]  <br>";
-$_SESSION[tann]=$row[1];
+$_SESSION['tann']=$row[1];
 
 				echo "<font color = red> TEACHER ID NUMBER can't changed </font> " . "</div>";
 echo "<div class='menu'>FULL NAME:
@@ -122,7 +122,7 @@ echo "</div></div></form></div>";
 
 				}			
 				?>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("main2.php");
 ?>
 <div class="fixed"><div class="title" align="center">TEACHER LOGIN</div>
@@ -143,6 +143,6 @@ require("main2.php");
                 </div><div class='menu'>  IF YOU ARE STUDENT PLEASE <a href="studentlogin.php">LOGIN HERE</a>  </div>
                   </div>
 </form></div>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("footer.php");
 ?>

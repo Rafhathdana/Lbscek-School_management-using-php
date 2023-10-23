@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -25,24 +25,26 @@ if(isset($submit12))
 {		
 session_destroy();
 				$Query="SELECT * from adminlbs where id = '$username' and password = '$password' ";
-               $dbresult=mysql_query($Query);						if(mysql_num_rows($dbresult)<1)
+               $dbresult=mysqli_query($conn,$Query);						if(mysqli_num_rows($dbresult)<1)
 	{
 		$found="N";
        
 	}
 	else
 	{ session_start();
-		$_SESSION[admin]=$username;
-        $_SESSION[rafh]=$password;
+		$_SESSION['admin']=$username;
+        $_SESSION['rafh']=$password;
 
 	}
 }
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
 require("main1.php");
-$Query="SELECT * from adminlbs where id = '$_SESSION[admin]' and password = '$_SESSION[rafh]' ";
-$dbresult=mysql_query($Query);
-while($row=mysql_fetch_row($dbresult))
+$adminId = $_SESSION['admin'];
+$rafhPassword = $_SESSION['rafh'];
+$Query = "SELECT * FROM adminlbs WHERE id = '$adminId' AND password = '$rafhPassword'";
+$dbresult=mysqli_query($conn,$Query);
+while($row=mysqli_fetch_row($dbresult))
 					{	
 				 echo "<div class='str'><div class='clear'>hello  :  $row[0] <div class='gallery'><img src='$row[9]'></div></div></div>";	}
              require("adminlist.php");
@@ -52,7 +54,7 @@ require("footer.php");
 				}			
 				?>
 
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("main.php");
 ?><div class="fixed"><div class="title" align="center">ADMIN LOGIN</div>
 <form id="form1" name="form1" method="post" action="editadmin.php">
@@ -71,6 +73,6 @@ require("main.php");
 <div class='menu'>                <input name="submit12" type="submit" class="menu" value="Login" " />  &nbsp&nbsp   <input name="Submit2" type="reset" class="menu" value="Reset" />
                 </div><div class='menu'>  IF YOU ARE STUDENT PLEASE <a href="studentlogin.php">LOGIN HERE</a>  </div>
                   </div>
-</form></div>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+</form></div><?php
 require("footer.php");
 ?>

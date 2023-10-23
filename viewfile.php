@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -21,16 +21,16 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
 require("main1.php");
-echo "<div class='str'>hello  :  "."$_SESSION[admin]"."</div>";
+echo "<div class='str'>hello  :  ".$_SESSION['admin']."</div>";
 				$Query="SELECT * from uploads order by uptime DESC";
-			$dbresult=mysql_query($Query);
+			$dbresult=mysqli_query($conn,$Query);
 
-			if(mysql_num_rows($dbresult) >0)
+			if(mysqli_num_rows($dbresult) >0)
 				{ 	echo "<div class='fixed'><div class='title' align='center'>UPLOADED FILES"."</div>";     
-					while($row=mysql_fetch_row($dbresult))
+					while($row=mysqli_fetch_row($dbresult))
 					{
 				       			
         echo "<div class='menu'>File Name  :  "."$row[0]"."	&nbsp&nbsp UPLOADED ON :'$row[6]'"."</div>";
@@ -52,7 +52,7 @@ echo "<div class='str'>hello  :  "."$_SESSION[admin]"."</div>";
 
 				}			
 				?>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("main1.php");
 ?>
 <div class="fixed"><div class="title" align="center">ADMIN LOGIN</div>
@@ -73,6 +73,6 @@ require("main1.php");
                 </div><div class='menu'>  IF YOU ARE STUDENT PLEASE <a href="studentlogin.php">LOGIN HERE</a>  </div>
                   </div>
 </form></div>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("footer.php");
 ?>

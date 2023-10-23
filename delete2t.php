@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -19,11 +19,11 @@ document.getElementById(elmnt).style.visibility="hidden"
 <?php
 		include("student.php");
 	extract($_POST);
-$rna=$_SESSION[rna];
+$rna=$_SESSION['rna'];
 if(isset($_POST['Submit']))
  {			
 		$Query="DELETE from student where register_number = '$rna' ";
-$dbresult=mysql_query($Query);
+$dbresult=mysqli_query($conn,$Query);
 
 			if($dbresult)
 {
@@ -39,5 +39,5 @@ include("delete1t.php");
 }
  }
 
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 

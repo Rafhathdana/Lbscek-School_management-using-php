@@ -1,13 +1,13 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
 extract($_POST);
 
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
 require("main1.php");
 }
 else{
-if (isset($_SESSION[teacher]))
+if (isset($_SESSION['teacher']))
 {
 require("main2.php");
 }
@@ -91,11 +91,11 @@ function verify()
 			include("student.php");
 			
 			$Query="SELECT * from student  where blood_group ='$blood' order by district ";
-			$dbresult=mysql_query($Query);
+			$dbresult=mysqli_query($conn,$Query);
 
-			if(mysql_num_rows($dbresult) >0)
+			if(mysqli_num_rows($dbresult) >0)
 				{
-					echo "<div class='fixed'><div class='title' align='center'>Search Result In Student"."</div>";   	while($row=mysql_fetch_row($dbresult))
+					echo "<div class='fixed'><div class='title' align='center'>Search Result In Student"."</div>";   	while($row=mysqli_fetch_row($dbresult))
 					{
 				       			
   
@@ -118,11 +118,11 @@ function verify()
 			}	
 			
 			$Query="SELECT * from teacherlbs  where blood_group ='$blood' order by district ";
-			$dbresult=mysql_query($Query);
+			$dbresult=mysqli_query($conn,$Query);
 
-			if(mysql_num_rows($dbresult) >0)
+			if(mysqli_num_rows($dbresult) >0)
 				{
-				echo "<div class='fixed'><div class='title' align='center'>Search Result In TEACHER"."</div>";     	while($row=mysql_fetch_row($dbresult))
+				echo "<div class='fixed'><div class='title' align='center'>Search Result In TEACHER"."</div>";     	while($row=mysqli_fetch_row($dbresult))
 					{
 				       			
 	
@@ -147,7 +147,7 @@ function verify()
 		
 		
 ?>
-﻿<?php
+<?php
 require("footer.php");
 ?>
 

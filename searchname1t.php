@@ -1,13 +1,13 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
 extract($_POST);
 
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
 require("main1.php");
 }
 else{
-if (isset($_SESSION[teacher]))
+if (isset($_SESSION['teacher']))
 {
 require("main2.php");
 }
@@ -81,11 +81,11 @@ function verify()
 			include("student.php");
 			
 			$Query="SELECT * from teacherlbs where name LIKE '%$searchname%' order by name ";
-			$dbresult=mysql_query($Query);
+			$dbresult=mysqli_query($conn,$Query);
 
-			if(mysql_num_rows($dbresult) >0)
+			if(mysqli_num_rows($dbresult) >0)
 				{
-					while($row=mysql_fetch_row($dbresult))
+					while($row=mysqli_fetch_row($dbresult))
 					{
 				       			
 	echo "<div class='fixed'><div class='title' align='center'>Search Result"."</div>";     
@@ -116,7 +116,7 @@ function verify()
 		
 		
 ?>
-﻿<?php
+<?php
 require("footer.php");
 ?>
 

@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -21,12 +21,15 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
-$Query="SELECT * from adminlbs where id = '$_SESSION[admin]' and password = '$_SESSION[rafh]' ";
-$dbresult=mysql_query($Query);
+  $adminId = $_SESSION['admin'];
+  $rafhPassword = $_SESSION['rafh'];
+  
+  $Query = "SELECT * FROM adminlbs WHERE id = '$adminId' AND password = '$rafhPassword'";
+  $dbresult=mysqli_query($conn,$Query);
 require("main1.php");
-				 echo "<div class='str'>hello  :  "."$_SESSION[admin]"."</div>";
+				 echo "<div class='str'>hello  :  "."$_SESSION['admin']"."</div>";
  require("addd.php");
 require("footer.php");
 require'student.php';
@@ -83,7 +86,7 @@ if ($uploadOk == 0) {
  else {
         $orgin="uploads/admin/$cap2/$cap2.jpg";
          $photo="$orgin";
-         $q1=mysql_query("insert into adminlbs values('$cap1','$cap2','$pad','$mn','$yy-$mm-$dd','$g','$blood','$department','$em','$photo')");
+         $q1=mysqli_query($conn,"insert into adminlbs values('$cap1','$cap2','$pad','$mn','$yy-$mm-$dd','$g','$blood','$department','$em','$photo')");
       if($q1)
          {  
      if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
@@ -100,7 +103,7 @@ exit();
 }
 ?>
 
-    ﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+    <?php
 require("main.php");
 ?><div class="fixed"><div class="title" align="center">ADMIN LOGIN</div>
 <form id="form1" name="form1" method="post" action="editadmin.php">
@@ -116,5 +119,5 @@ require("main.php");
                   </div>
 </form></div>
 
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+
 

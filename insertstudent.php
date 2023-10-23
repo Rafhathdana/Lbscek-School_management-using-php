@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿    ﻿﻿<?php
+﻿﻿<?php
 require("main.php");
 ?></body>
 <head>
@@ -246,7 +246,7 @@ if(gender=='')
 </div>
 </form></center>
 
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿ ﻿﻿<?php
+ <?php
 require("footer.php");
 ?>
 </body>
@@ -290,7 +290,7 @@ $cap2=strtoupper($rn);
 if(isset($_POST['submit']))
  {
 
- $q1=mysql_query("insert into student values('$cap1','$cap2','$an','$aad','$yy-$mm-$dd','$g','$blood','$rel','$comm','$branch','$sem','$di','$rol','$em','$mn','$fan','$fao','$fmo','$man','$mao','$mmo','$gn','$gmn','$hn','$lm','$district','$st','$cn','$pin')");
+ $q1=mysqli_query($conn,"insert into student values('$cap1','$cap2','$an','$aad','$yy-$mm-$dd','$g','$blood','$rel','$comm','$branch','$sem','$di','$rol','$em','$mn','$fan','$fao','$fmo','$man','$mao','$mmo','$gn','$gmn','$hn','$lm','$district','$st','$cn','$pin')");
 if($q1)
 {
 echo '<script language="javascript">';

@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -19,9 +19,9 @@ document.getElementById(elmnt).style.visibility="hidden"
 <?php
 		include("student.php");
 	extract($_POST);
-$rna=$_SESSION[rnna];
-$rma=$_SESSION[rnma];
-$ma=$_SESSION[teacher];
+$rna=$_SESSION['rnna'];
+$rma=$_SESSION['rnma'];
+$ma=$_SESSION['teacher'];
 $m="SELECT uploaded_by from uploads where file_name = '$rna' and file = '$rma'";
 if(isset($_POST['Submit']))
  {			
@@ -30,7 +30,7 @@ if(isset($_POST['Submit']))
 If(unlink($rma))
 {
 $Query="DELETE from uploads where file_name = '$rna' and file = '$rma' and uploaded_by='$ma'";
-$dbresult=mysql_query($Query);
+$dbresult=mysqli_query($conn,$Query);
 
 			if($dbresult)
 {
@@ -60,5 +60,5 @@ include("tdeletefile2.php");
 
  }
 
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 

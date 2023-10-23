@@ -1,21 +1,17 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
-/* Attempt MySQL server connection. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
+﻿﻿<?php
 $serverna = "sql308.epizy.com";
 $userna = "epiz_24378761";
-$passwo = "######";
+$passwo = "Rafhath1236438";
 $dbna = "epiz_24378761_college";
 
 
 // Create connection
-   $conn = mysql_connect($serverna, $userna, $passwo, $dbna);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
- 
-if(! $conn ) {
-      die('Could not connect: ' . mysql_error());
-   }
-   
-   mysql_select_db('epiz_24378761_college');
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-?>	
-
+// Now you can use $conn for your database operations
+?>

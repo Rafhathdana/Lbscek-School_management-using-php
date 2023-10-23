@@ -1,12 +1,12 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 		include("student.php");
 	extract($_POST);
 	$Query="SELECT * from chats where (too='$id' or too='$rd') and status='delete' order by timemsg DESC";
-			$dbresult=mysql_query($Query);
+			$dbresult=mysqli_query($conn,$Query);
 
-			if(mysql_num_rows($dbresult) >0)
+			if(mysqli_num_rows($dbresult) >0)
 				{ 	echo "<div class='fixed'><div class='title' align='center'>Trash Box"."</div>";     
-					while($row=mysql_fetch_row($dbresult))
+					while($row=mysqli_fetch_row($dbresult))
 					{
 			If($row[5]==delete)
 {

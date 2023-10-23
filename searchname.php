@@ -1,15 +1,13 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
 extract($_POST);
-
-if (isset($_SESSION[admin]))
-{
-require("main1.php");
+if (isset($_SESSION['admin'])) {
+    require("main1.php");
+} else {
+    require("main.php");
 }
-else{
-require("main.php");
-}
-?></body><head>
+?>
+</body><head>
 <script type="text/javascript">
 function showmenu(elmnt)
 {
@@ -70,8 +68,7 @@ function verify()
 </select>
 </div><div class='menu'>                      <input name="Search" type="submit" class="menu" id="Search" value="Search">
                      </div></div>   </form></div>
-
-﻿<?php
+<?php
 require("footer.php");
 ?>
 

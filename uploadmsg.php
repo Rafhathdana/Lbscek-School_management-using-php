@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -21,40 +21,43 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
-$Query="SELECT * from adminlbs where id = '$_SESSION[admin]' and password = '$_SESSION[rafh]' ";
-$dbresult=mysql_query($Queryqw);
+  $adminId = $_SESSION['admin'];
+  $rafhPassword = $_SESSION['rafh'];
+  
+  $Query = "SELECT * FROM adminlbs WHERE id = '$adminId' AND password = '$rafhPassword'";
+  $dbresult=mysqli_query($conn,$Queryqw);
 require("main1.php");
-				 echo "<div class='str'>hello  :  "."$_SESSION[admin]"."</div>";
+				 echo "<div class='str'>hello  :  ".$_SESSION['admin']."</div>";
 require("msglist.php");
  require("uploadsmsg1.php");
 require("footer.php");
 $fn=$_POST['fn'];
 $Queryqw="SELECT id  from adminlbs where id ='$fn'";
-$dbresult=mysql_query($Queryqw);
-if(mysql_num_rows($dbresult) >0)
+$dbresult=mysqli_query($conn,$Queryqw);
+if(mysqli_num_rows($dbresult) >0)
   {$cap1=strtoupper($fn);
     }
 else
 {
  $Queryqw="SELECT id  from teacherlbs where id ='$fn'";
- $dbresult=mysql_query($Queryqw);
- if(mysql_num_rows($dbresult) >0)
+ $dbresult=mysqli_query($conn,$Queryqw);
+ if(mysqli_num_rows($dbresult) >0)
  {$cap1=strtoupper($fn);
  }
  else
  {
   $Queryqw="SELECT register_number  from student where register_number ='$fn'";
-  $dbresult=mysql_query($Queryqw);
-  if(mysql_num_rows($dbresult) >0)
+  $dbresult=mysqli_query($conn,$Queryqw);
+  if(mysqli_num_rows($dbresult) >0)
   {$cap1=strtoupper($fn);
   }
   else
   { 
    $Queryqw="SELECT admission_number  from student where admission_number ='$fn'";
-   $dbresult=mysql_query($Queryqw);
-   if(mysql_num_rows($dbresult) >0)
+   $dbresult=mysqli_query($conn,$Queryqw);
+   if(mysqli_num_rows($dbresult) >0)
 {$cap1=strtoupper($fn);
 }
    else
@@ -66,13 +69,16 @@ $sn=$_POST['sn'];
 $mn=$_POST['mn'];
 $status= 'offline';
 $stat= 'sented';
-$fromm = "$_SESSION[admin]";
+$fromm = $_SESSION['admin'];
 $upin = 'admin';
 date_default_timezone_set('Asia/Kolkata');
 $date = date('Y-m-d H:i:s', time());
 $qwe= "$date";
-mkdir("uploads/notice/$_SESSION[admin]");
-$target_dir = "uploads/notice/$_SESSION[admin]/";
+$adminSession = $_SESSION['admin'];
+
+mkdir("uploads/notice/" . $adminSession);
+$target_dir = "uploads/notice/" . $adminSession . "/";
+
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -106,7 +112,7 @@ if ($uploadOk == 5) {
          $files="$target_file";
        if(isset($cap1))
     {    
-       $q1=mysql_query("insert into chats values('$cap1','$fromm','$sn','$mn','$upin','$status','$qwe','$files','$stat')");
+       $q1=mysqli_query($conn,"insert into chats values('$cap1','$fromm','$sn','$mn','$upin','$status','$qwe','$files','$stat')");
       if($q1)
          { 
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
@@ -134,7 +140,7 @@ if ($uploadOk == 5) {
 else
 {
 if(isset($cap1))
-    {     $q1=mysql_query("insert into chats values('$cap1','$fromm','$sn','$mn','$upin','$status','$qwe','0','$stat')");
+    {     $q1=mysqli_query($conn,"insert into chats values('$cap1','$fromm','$sn','$mn','$upin','$status','$qwe','0','$stat')");
       if($q1)
          {  
   echo "<script type='text/javascript'>alert(\"Messege Successfully Sended\")</script>";
@@ -155,7 +161,7 @@ exit();
 }
 ?>
 
-    ﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+    <?php
 require("main.php");
 ?><div class="fixed"><div class="title" align="center">ADMIN LOGIN</div>
 <form id="form1" name="form1" method="post" action="editadmin.php">
@@ -171,5 +177,5 @@ require("main.php");
                   </div>
 </form></div>
 
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+
 

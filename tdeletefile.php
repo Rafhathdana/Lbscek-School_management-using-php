@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -21,17 +21,17 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 
-if (isset($_SESSION[teacher]))
+if (isset($_SESSION['teacher']))
 {
 require("main2.php");
-echo "<div class='str'>hello  :  "."$_SESSION[teacher]"."</div>";
+echo "<div class='str'>hello  :  ".$_SESSION['teacher']."</div>";
 require("tdeletefile1.php");
     require("footer.php");
 					exit();
 
 				}			
 				?>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("main2.php");
 ?>
 <div class="fixed"><div class="title" align="center">TEACHER LOGIN</div>
@@ -53,7 +53,7 @@ require("main2.php");
                   </div>
 </form></div>
 
-  ﻿<?php
+  <?php
 require("footer.php");
 ?>
 

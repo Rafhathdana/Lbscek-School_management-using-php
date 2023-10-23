@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 require("main.php");
 ?></body><head>
 <script type="text/javascript">
@@ -51,7 +51,7 @@ function verify()
 <div class='menu'>                <input name="submit12" type="submit" class="menu" value="Login" onclick="verify();" />    <input name="Submit2" type="reset" class="menu" value="Reset" />
                 </div></div>
                       </form></div>
-  ﻿<?php
+  <?php
 require("footer.php");
 ?>
 

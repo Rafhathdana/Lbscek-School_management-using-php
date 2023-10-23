@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -25,26 +25,26 @@ if(isset($submit))
 {		
 session_destroy();
 				$Query="SELECT * from student where register_number = '$username' and admission_number = '$password' ";
-               $dbresult=mysql_query($Query);						if(mysql_num_rows($dbresult)<1)
+               $dbresult=mysqli_query($conn,$Query);						if(mysqli_num_rows($dbresult)<1)
 	{
 		$found="N";
         require("main.php");
 	}
 	else
 	{ session_start();
-		$_SESSION[login]=$username;
-        $_SESSION[raf]=$password;
+		$_SESSION['login']=$username;
+        $_SESSION['raf']=$password;
        
 	}
 }
-if (isset($_SESSION[login]))
-{$dbresult=mysql_query($Query);
+if (isset($_SESSION['login']))
+{$dbresult=mysqli_query($conn,$Query);
 require("main.php");
-while($row=mysql_fetch_row($dbresult))
+while($row=mysqli_fetch_row($dbresult))
 					{	
 				 echo "<div class='str'>hello  :  "."$row[0]"."</div>";
-        $_SESSION[departmen]=$row[9];
-        $_SESSION[se]=$row[10];
+        $_SESSION['departmen']=$row[9];
+        $_SESSION['se']=$row[10];
 
 	 		}
              require("studentlist.php");

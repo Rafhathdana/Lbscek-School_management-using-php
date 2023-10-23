@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -21,18 +21,18 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 
-if (isset($_SESSION[teacher]))
+if (isset($_SESSION['teacher']))
 {
 require("main2.php");
-echo "<div class='str'>hello  :  "."$_SESSION[teacher]"."</div>";
+echo "<div class='str'>hello  :  ".$_SESSION['teacher']."</div>";
 require("rafh.php");
 $rn=$_POST['rn'];
 $Query="SELECT * from student where register_number = '$rn' ";
-$dbresult=mysql_query($Query);
+$dbresult=mysqli_query($conn,$Query);
             
-		if(mysql_num_rows($dbresult) >0)
+		if(mysqli_num_rows($dbresult) >0)
 				{
-					while($row=mysql_fetch_row($dbresult))
+					while($row=mysqli_fetch_row($dbresult))
 					{
 						 				
 echo "<div class='fixed'><div class='title' align='center'>EDIT STUDENT DATA</div>"	;
@@ -170,7 +170,7 @@ echo "</div></div></form></div>";
 
 				}			
 				?>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("main2.php");
 ?>
 <div class="fixed"><div class="title" align="center">TEACHER LOGIN</div>
@@ -191,6 +191,6 @@ require("main2.php");
                 </div><div class='menu'>  IF YOU ARE STUDENT PLEASE <a href="studentlogin.php">LOGIN HERE</a>  </div>
                   </div>
 </form></div>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("footer.php");
 ?>

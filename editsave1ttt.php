@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -20,7 +20,7 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 $fn=$_POST['editfn'];
-$an=$_SESSION[tann];
+$an=$_SESSION['tann'];
 $aad=$_POST['editaad'];
 $mn=$_POST['editmn'];
 $date=$_POST['editdate'];
@@ -43,7 +43,7 @@ if(isset($_POST['Submit']))
 		
 		
  $Query = "UPDATE student SET full_name =  '$cap1', id =  '$cap2', password =  '$aad', mobile_number =  '$mn', dob =  '$date', gender =  '$g', blood_group =  '$blood', branch =  '$branch', email =  '$em', position =  '$gmn', house_name =  '$hn', land_mark =  '$lm', district =  '$district', state =  '$st', country =  '$cn', pin =  '$pin' where register_number = '$cap2' and admission_number = '$an'";
-$dbresulta=mysql_query($Query);
+$dbresulta=mysqli_query($conn,$Query);
 
 			if($dbresulta)
 {
@@ -59,5 +59,5 @@ include("updateteacher.php");
 }
  }
 
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 

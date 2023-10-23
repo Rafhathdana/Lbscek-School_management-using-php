@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -21,10 +21,10 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 
-if (isset($_SESSION[admin]))
+if (isset($_SESSION['admin']))
 {
 require("main1.php");
-echo "<div class='str'>hello  :  "."$_SESSION[admin]"."</div>";  
+echo "<div class='str'>hello  :  "."$_SESSION['admin']"."</div>";  
 require("sear.php");
 			$sem=$_POST['sem'];
 			$di=$_POST['di'];
@@ -66,10 +66,10 @@ $Query="SELECT * from student where division = '$di' order by roll_number ";
    }
 
 
-			$dbresult=mysql_query($Query);
+			$dbresult=mysqli_query($conn,$Query);
 
-			if(mysql_num_rows($dbresult) >0)
-				{						while($row=mysql_fetch_row($dbresult))
+			if(mysqli_num_rows($dbresult) >0)
+				{						while($row=mysqli_fetch_row($dbresult))
 					{
 				       			
                   echo "<div class='dana'>Roll Number  :  "."$row[12]"."</div>";
@@ -110,7 +110,7 @@ $Query="SELECT * from student where division = '$di' order by roll_number ";
 
 				}			
 				?>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("main1.php");
 ?>
 <div class="fixed"><div class="title" align="center">ADMIN LOGIN</div>
@@ -131,15 +131,7 @@ require("main1.php");
                 </div><div class='menu'>  IF YOU ARE STUDENT PLEASE <a href="studentlogin.php">LOGIN HERE</a>  </div>
                   </div>
 </form></div>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("footer.php");
 ?>
-      if($branch == '')
-	  {
-   $Query="SELECT * from student where division = '$di' order by roll_number ";
-   }  
-        if($di == '')
-	  {
-   $Query="SELECT * from student where branch = '$branch' order by roll_number ";
-   }
 

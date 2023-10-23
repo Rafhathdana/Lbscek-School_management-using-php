@@ -1,6 +1,6 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+﻿﻿<?php
 session_start();
-?>﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+?>
 <head>
 <script type="text/javascript">
 function showmenu(elmnt)
@@ -21,15 +21,18 @@ document.getElementById(elmnt).style.visibility="hidden"
 		include("student.php");
 	extract($_POST);
 
-if (isset($_SESSION[login]))
+if (isset($_SESSION['login']))
 {
-$Query="SELECT * from student where register_number = '$_SESSION[login]' and admission_number = '$_SESSION[raf]' ";
-$dbresult=mysql_query($Query);
+	$registerNumber = $_SESSION['login'];
+	$admissionNumber = $_SESSION['raf'];
+	
+	$Query = "SELECT * FROM student WHERE register_number = '$registerNumber' AND admission_number = '$admissionNumber'";
+	 $dbresult=mysqli_query($conn,$Query);
 require("main.php");
             
-		if(mysql_num_rows($dbresult) >0)
+		if(mysqli_num_rows($dbresult) >0)
 				{
-					while($row=mysql_fetch_row($dbresult))
+					while($row=mysqli_fetch_row($dbresult))
 					{
 						 echo "<div class='str'>hello  :  "."$row[0]"."</div>";
 				
@@ -167,7 +170,7 @@ echo "</div></div></form></div>";
 
 				}			
 				?>
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<?php
+<?php
 require("main.php");
 ?><div class="fixed"><div class="title" align="center">STUDENT LOGIN</div>
 <form id="form1" name="form1" method="post" action="editstudent.php">
